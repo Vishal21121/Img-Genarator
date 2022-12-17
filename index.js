@@ -1,13 +1,15 @@
 // express initialization
 const express = require('express')
-const app = express();
-app.use(express.json())
-
 // using dotenv package
 require('dotenv').config();
-
-
+const cors = require('cors');
+const app = express();
+app.use(express.json())
+app.use(cors())
 const { Configuration, OpenAIApi } = require("openai");
+
+
+
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -21,6 +23,7 @@ app.post('/api/image',async (req,res)=>{
         n: 1,
         size: "512x512",
       });
+    console.log(response.data.data[0].url)
     res.status(200).json({success:true,data:response.data.data[0].url})
     
 })
