@@ -18,15 +18,18 @@ const request = async function () {
     document.getElementById('img').setAttribute('src', val.data)
 }
 
-document.addEventListener('keyup', (e) => {
-    if (e.code == 'Enter') {
+document.getElementById('submit').addEventListener('click', (e) => {
+    e.preventDefault();
+    if(!text){
+        console.log("hello")
+        document.getElementById('alert').classList.toggle('invisible')
+        setTimeout(()=>{
+            document.getElementById('alert').classList.toggle('invisible')
+        },5000)
+    }else{
         document.getElementById('img').setAttribute('src', 'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif')
         request()
     }
 })
 
-document.getElementById('submit').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('img').setAttribute('src', 'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif')
-    request()
-})
+
